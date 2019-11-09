@@ -15,4 +15,10 @@ snapshotalyzer is using AWS configuration file to connect to AWS.
 #Running
 
 To list ec2 instances, run below
-'pipenv run "python /snapshotalyzer/ec2/list_ec2.py'
+'pipenv run python ec2/list_ec2.py list --project INSTANCE_PROJECT_TAG_NAME'
+
+To start ec2 instance, run below
+'pipenv run python ec2/list_ec2.py start --project INSTANCE_PROJECT_TAG_NAME'
+
+To stop ec2 instance, run below
+'pipenv run python ec2/list_ec2.py stop --project INSTANCE_PROJECT_TAG_NAME'
