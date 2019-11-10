@@ -75,10 +75,18 @@ def create_snapshots(project):
     "Create EC2 volume snapshots"
     instances = filter_instances(project)
     for i in instances:
+        print("Stopping {0}...".format(i.id))
         i.stop()
+        i.wait_until_stopped()
         for v in i.volumes.all():
-            print("Creating snapshot for volume {0}...".format(v.id))
-            v.create_snapshot(Description="Created by snapshotalyzer script")            
+            print("Creating snapshot for instance {0} volume {1}...".format(i.id, v.id))
+            v.create_snapshot(Description="Created by snapshotalyzer script")
+        i.start()
+        print("Starting the instance {0}...".format(i.id))
+
+    print("Job's done, instances restarted, snaps created!!!")
+
+    return
 
 @cli.group('instances')
 def instances():
